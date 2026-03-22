@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Week4</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Merge</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7796,307 +7796,297 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=940236a2-ab0d-4afb-9606-050823341f23">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Week-4">Week 4<a class="anchor-link" href="#Week-4">¶</a></h1><h2 id="Overview">Overview<a class="anchor-link" href="#Overview">¶</a></h2><p>Ok, we've arrived at week 4. This lecture covers:</p>
+<h1 id="Part-2-Merging-Historical-and-Recent-Crime-Data">Part 2 Merging Historical and Recent Crime Data<a class="anchor-link" href="#Part-2-Merging-Historical-and-Recent-Crime-Data">¶</a></h1><p>So far we've been working with crime data from 2018 onwards. But San Francisco has published crime data going all the way back to 2003! Having access to this longer time series would let us:</p>
+<ul>
+<li>Study long-term trends in crime</li>
+<li>See how crime patterns changed before, during, and after major events</li>
+<li>Have more statistical power for our analyses</li>
+</ul>
+<p>The catch? <strong>The two datasets don't have the same structure.</strong> This is an incredibly common situation in data science. Organizations change how they record data over time, different departments use different formats, and merging datasets requires careful thought.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Step-2.1:-Understand-both-schemas">Step 2.1: Understand both schemas<a class="anchor-link" href="#Step-2.1:-Understand-both-schemas">¶</a></h2><blockquote>
+<p><strong>Mini Exercise</strong>: Schema exploration</p>
+<p>Download the historical dataset "Police Department Incident Reports: Historical 2003 to May 2018" from SF OpenData (or use the file provided).</p>
+<ul>
+<li>Load both datasets and examine their columns</li>
+<li>Which columns appear in both datasets (perhaps with different names)?</li>
+<li>Which columns are unique to each dataset?</li>
+<li>Create a "mapping" showing which columns in the historical data correspond to which columns in the recent data</li>
+</ul>
+</blockquote>
+<p>Here's a starter to help you think about the mapping:</p>
+<table>
+<thead>
+<tr>
+<th>Information</th>
+<th>Historical Column</th>
+<th>Recent Column</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Crime type</td>
+<td><code>Category</code></td>
+<td><code>Incident Category</code></td>
+</tr>
+<tr>
+<td>Police district</td>
+<td><code>PdDistrict</code></td>
+<td><code>Police District</code></td>
+</tr>
+<tr>
+<td>Date</td>
+<td><code>Date</code></td>
+<td><code>Incident Date</code></td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<div class="alert alert-block alert-info">
+<b>LLM guidance:</b> You should be able to do this no problem in pandas, but if you find it tough, feel free to ask an LLM for help.
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Step-2.2:-Identify-the-common-ground">Step 2.2: Identify the common ground<a class="anchor-link" href="#Step-2.2:-Identify-the-common-ground">¶</a></h2><blockquote>
+<p><strong>Mini Exercise</strong>: Essential columns</p>
+<ul>
+<li>For the analyses we've have been doing (crime categories, time patterns, police districts), and will be doing (<strong>mapping</strong>) which columns do we need?</li>
+<li>Make a list of the essential/potentially interesting columns and their names in each dataset</li>
+<li>Check the data types — are dates stored the same way? Are coordinates in the same format?</li>
+<li>Handle any format differences (hint: look carefully at how dates are formatted in each file)</li>
+</ul>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Step-2.3:-The-Category-Problem">Step 2.3: The Category Problem<a class="anchor-link" href="#Step-2.3:-The-Category-Problem">¶</a></h2><p>This is where things get interesting (and tricky). The crime categories in the two datasets are <strong>not the same</strong>.</p>
+<blockquote>
+<p><strong>Mini Exercise</strong>: Explore the category differences</p>
+<ul>
+<li>List all unique categories in each dataset</li>
+<li>How many categories are in the historical data? How many in the recent data?</li>
+<li>Which categories appear to match (even if the names are slightly different)?</li>
+<li>Which categories exist in one dataset but not the other?</li>
+</ul>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Intermezzo:-The-many-flavors-of-category-mismatch">Intermezzo: The many flavors of category mismatch<a class="anchor-link" href="#Intermezzo:-The-many-flavors-of-category-mismatch">¶</a></h3><p>Here are some concrete problems you'll discover:</p>
+<p><strong>Problem 1: Case and formatting differences</strong></p>
+<p>The historical data uses ALL CAPS (<code>ASSAULT</code>, <code>BURGLARY</code>) while the recent data uses Title Case (<code>Assault</code>, <code>Burglary</code>). This is easy to fix with <code>.str.upper()</code> or <code>.str.lower()</code>.</p>
+<p><strong>Problem 2: Name changes</strong></p>
+<p>Some categories look like they were simply renamed:</p>
+<ul>
+<li><code>VEHICLE THEFT</code> → <code>Motor Vehicle Theft</code></li>
+</ul>
+<p><strong>Problem 3: Categories that split or merged</strong></p>
+<p>This is trickier. For example:</p>
+<ul>
+<li>The historical <code>SEX OFFENSES</code> might correspond to multiple recent categories: <code>Sex Offense</code>, <code>Rape</code>, <code>Human Trafficking</code></li>
+<li>The recent data has both <code>Drug Offense</code> and <code>Drug Violation</code> — should these both map to the historical <code>DRUG/NARCOTIC</code>?</li>
+<li><code>VANDALISM</code> in historical data — is that <code>Vandalism</code> or <code>Malicious Mischief</code> in the recent data? Or both?</li>
+</ul>
+<p><strong>Problem 4: Categories that disappeared or appeared</strong></p>
+<ul>
+<li><code>DRUNKENNESS</code> exists in historical data but not in recent — was it merged into something else? Decriminalized? Maybe Google it or ask an LLM.</li>
+<li><code>Traffic Collision</code> exists in recent data but not historical — is this a new category, or was it previously recorded differently?</li>
+<li><code>Human Trafficking</code> appears in recent data — is this genuinely new, or was it previously categorized under something else?</li>
+</ul>
+<p><strong>Problem 5: Ambiguous mappings</strong></p>
+<p>Sometimes it's genuinely unclear how categories should map. Does historical <code>WEAPON LAWS</code> correspond to recent <code>Weapons Offense</code>, <code>Weapons Carrying Etc</code>, or both? Without detailed documentation (which often doesn't exist), you have to make judgment calls.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Step-2.4:-Solving-the-category-problem">Step 2.4: Solving the category problem<a class="anchor-link" href="#Step-2.4:-Solving-the-category-problem">¶</a></h2><p>There are two ways that I can think of to approach this matching problem:</p>
+<p><strong>Approach A: Manual inspection</strong></p>
+<p>Look at both lists carefully and create mappings based on your judgment.</p>
+<p><strong>Approach B: Use an LLM to help</strong></p>
+<p>LLMs have broad background knowledge about crime categories, legal terminology, and how classification systems work. I think that they might be surprisingly helpful here.</p>
+<blockquote>
+<p><strong>Exercise</strong>: LLM-assisted category matching</p>
+<p>Try asking an LLM to help you match categories. Here's a suggested approach:</p>
 <ol>
-<li><strong>More visualization theory</strong>: A video lecture on data encodings and representations — which visual channels work best and why.</li>
-<li><strong>Two-variable data exploration</strong>: Reading from DAOST Chapter 3, plus hands-on work with logarithmic plots and spatial power laws in the crime data.</li>
-<li><strong>Linear regression</strong>: Using pairwise scatterplots and linear fits to discover which of your Personal Focus Crimes share similar temporal patterns across the week.</li>
+<li>Give the LLM both lists of categories</li>
+<li>Ask it to suggest which categories likely correspond to each other</li>
+<li>Ask it to explain <em>why</em> it thinks certain categories match (this helps you evaluate its suggestions)</li>
+<li>Ask it to flag any ambiguous cases where human judgment is needed</li>
 </ol>
-<p><em>New this week</em>: For finer-grained LLM guidance within multi-part exercises, you'll see notes in <font color="gray">gray text</font> inline, alongside the usual blue boxes.</p>
+<p><strong>Important</strong>: Don't blindly trust the LLM's suggestions! Use them as a starting point, then verify as described below.</p>
+</blockquote>
+<div class="alert alert-block alert-info">
+<b>LLM guidance:</b> This is a <i>great</i> use case for LLMs — they have background knowledge about how crime categories work and can spot likely matches faster than manual inspection. But remember: the LLM is making educated guesses based on names. Always verify its suggestions against actual data when possible (see below).
+</div>
+<h3 id="The-crucial-last-step:-Data-driven-validation**">The crucial last step: Data-driven validation**<a class="anchor-link" href="#The-crucial-last-step:-Data-driven-validation**">¶</a></h3><p>Even after creating a mapping, you should validate it:</p>
+<ul>
+<li>For categories you've matched, do the counts make sense? If <code>VANDALISM</code> mapped to <code>Malicious Mischief</code>, do you see roughly similar numbers of incidents per year?</li>
+<li>Look at the transition year (2018) — if your mapping is correct, the yearly/monthly trend should make sense. A sudden jump or drop suggests a mapping problem.</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=97749093-0d77-495c-96df-4a0ac7cb489a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Part-1:-More-lecturing-on-dataviz">Part 1: More lecturing on dataviz<a class="anchor-link" href="#Part-1:-More-lecturing-on-dataviz">¶</a></h2><p>We begin today by learning more about the theory of visualization, digging into data encodings and representations.</p>
+<h2 id="Step-2.5:-Define-your-Personal-Focus-Crimes">Step 2.5: Define your Personal Focus Crimes<a class="anchor-link" href="#Step-2.5:-Define-your-Personal-Focus-Crimes">¶</a></h2><p>Given all these complications, it's time to make some decisions. You need to define a set of <strong>Personal Focus Crimes</strong> — categories that you can confidently track across both datasets.</p>
+<blockquote>
+<p><strong>Exercise</strong>: Define Personal Focus Crimes</p>
+<p>Create a list of crime categories that:</p>
+<ol>
+<li>Exist in both datasets (possibly with different names)</li>
+<li>Have a mapping between the two naming systems that you trust based on checking trendlines</li>
+<li>Are interesting enough to analyze (not too rare, not just "Other")</li>
+</ol>
+<p>For each Personal Focus Crime, document:</p>
+<ul>
+<li>The name you'll use in your merged dataset</li>
+<li>The corresponding category name in the historical data</li>
+<li>The corresponding category name(s) in the recent data</li>
+<li>Your confidence level (high/medium/low) in the mapping</li>
+<li>Any notes or caveats</li>
+</ul>
+<p><strong>Example format:</strong></p>
+<p>| Personal Focus Crime | Historical | Recent | Confidence | Notes |
+|---------------------|------------|--------|------------|-------|
+| Assault | ASSAULT | Assault | High | Direct match |
+| Burglary | BURGLARY | Burglary | High | Direct match |
+| Drug Offense | DRUG/NARCOTIC | Drug Offense, Drug Violation | Medium | Merged two recent categories |
+| Vehicle Theft | VEHICLE THEFT | Motor Vehicle Theft | High | Name change only |
+| ... | ... | ... | ... | ... |</p>
+<p>It's completely fine if your Personal Focus Crimes list is shorter than our original focus crimes list. <strong>Quality over quantity</strong> — it's better to have 8 crimes you can track confidently than 16 where half are questionable.</p>
+</blockquote>
+<div class="alert alert-block alert-info">
+<b>LLM guidance:</b> Use your LLM to help identify good candidates and spot potential issues, but <b>you</b> need to make the final decisions about what goes on your list. These are judgment calls that affect all your downstream analysis.
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=078e1e93-171e-476d-96a3-963977e88fcf">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">YouTubeVideo</span>
-<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">'zE6Nr8trdrw'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">450</span><span class="p">)</span>
-</pre></div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Step-2.6:-Merge-and-validate">Step 2.6: Merge and validate<a class="anchor-link" href="#Step-2.6:-Merge-and-validate">¶</a></h2><blockquote>
+<p><strong>Exercise</strong>: Now you're ready construct your final dataset and put the pieces from above together! Some of the key elements were</p>
+<ul>
+<li>Standardize column names across both datasets</li>
+<li>Apply your category mappings to create a unified category column</li>
+<li>Concatenate the two datasets</li>
+<li>Remove any duplicate records (there may be overlap around May 2018 — check for incidents that appear in both files)</li>
+<li><strong>Save your merged dataset for use in future analyses</strong></li>
+</ul>
+</blockquote>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<iframe allowfullscreen="" frameborder="0" height="450" src="https://www.youtube.com/embed/zE6Nr8trdrw" width="800"></iframe>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=de5385cd-acd9-4f2b-aaa8-182af2aa832b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <blockquote>
-<p><em>Exercise 1.1:</em> Some questions about the video.</p>
+<p><strong>Mini Exercise</strong>: Quick visual overview to validate your merge</p>
+<p>Create a set of line plots showing yearly counts for each of your Personal Focus Crimes from 2003-2025 (or whatever your date range is).</p>
 <ul>
-<li>Mention 10 examples of ways we can encode data.</li>
-<li>Are all encodings created equally? Why not? Can you think of an example from the previous lectures?</li>
-<li>Mention 3 encodings that are difficult for the human eye to parse. Can you find an example of a visualization online that uses one of those three?</li>
-<li>Explain in your own words: What is the problem with pie-charts?</li>
+<li>Does 2018 look reasonable? The transition between datasets should be make sense</li>
+<li>For any suspicious patterns, document what you found and how you addressed it (or why you left it as-is)</li>
+</ul>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Step-2.7:-Think-back-on-your-work-in-this-long-and-epic-run-of-exercises.">Step 2.7: Think back on your work in this long and epic run of exercises.<a class="anchor-link" href="#Step-2.7:-Think-back-on-your-work-in-this-long-and-epic-run-of-exercises.">¶</a></h2><blockquote>
+<p><strong>Exercise</strong>:</p>
+<ul>
+<li>What assumptions did you have to make during this merge?</li>
+<li>Which of your Personal Focus Crimes are you most/least confident about? Why?</li>
+<li>If someone used your merged dataset without reading your documentation, what mistakes might they make?</li>
+<li>How does this experience connect to the "dirty data" concept from the Richardson et al. reading in Week 1?</li>
 </ul>
 </blockquote>
 <div class="alert alert-block alert-info">
-Try to answer these using your human brain, don't use an LLM.
+<b>LLM guidance:</b> The reflection should be your own thinking. No LLMs allowed. This is where you practice the critical data science reasoning that separates good analysts from people who just run code.
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c824a430-4a0e-4b26-8a6b-72c0728a9706">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Part-2:-Exploratory-data-visualization,-two-variables">Part 2: Exploratory data visualization, two variables<a class="anchor-link" href="#Part-2:-Exploratory-data-visualization,-two-variables">¶</a></h2><p>I told you how I love the Data Analysis with Open Source Tools book. If you managed to read Chapter 3, which is about visualizing data with two variables, before coming to class today it's great. If you haven't yet, this is the time to do it!</p>
-<p><em>Reading</em>: DAOST Chapter 3 up to <em>Graphical Analysis and Presentation Graphics</em> on page 68 in the PDF. <strong>Like Last week, you can find it on Teams</strong>.</p>
-<p>And now a few exercises to reflect on the text:</p>
+<p><strong>Uncle Sune Rants</strong>: This run of exercises and mini exercises in part 2 migth feel frustrating and difficult. If yes, that's awesome! That's the point. You're getting stronger, smarter, and ready for the real world.</p>
+<p>In the real world, you almost never get perfectly clean, perfectly formatted data handed to you on a silver platter. The ability to wrangle messy, inconsistent data into a usable form is one of the most valuable skills in data science. And understanding the <em>assumptions</em> you make during this process is crucial. Those assumptions WILL come back to bite you if you're not careful.</p>
+<p>The category matching problem is particularly important because <strong>the categories we use shape what we can see</strong>. If <code>DRUNKENNESS</code> disappeared as a category in 2018, it doesn't mean public intoxication stopped — it means we can't track it consistently over time. Being aware of these limitations of that type is essential for honest data analysis.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=990792b1-088c-4557-ba1a-ea3305a3a933">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><em>Exercise 2.1:</em> Questions from DAOST Chapter 3.</p>
-<blockquote>
-<ul>
-<li>Looking at Fig 3-1, Janert writes "the data itself shows clearly that the amount of random noise in the data is small". What do you think his argument is?</li>
-<li>Can you think of a real-world example of a multivariate relationship like the one in Fig 3-3 (lower right panel)?</li>
-<li>What are the two methods Janert metions for smoothing noisy data? Can you think of other ones?</li>
-<li>What are residuals? Why is it a good idea to plot the residuals of your fit?</li>
-<li>Explain in your own words the point of the smooth tube in figure 3-7.</li>
-<li>What the h#ll is banking and what part of our visual system does it use to help us see patterns? What are potential problems with banking?</li>
-<li>Summarize the discussion of Graphical Analysis and Presentation Graphics on pp. 68-69 in your own words.</li>
-</ul>
-</blockquote>
-<div class="alert alert-block alert-info">
-Read the text and answer the questions to make sure you get it. No need for LLMs here
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=80698f45-0ba8-422f-b918-06a07c14732c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Ok. Let's briefly talk about logarithms and logarithmic plots (if you take my networks class in the fall semester you'll se lots of loglog plots since they're important for understanding a key property of networks).</p>
-<p><em>Exercise 2.2</em>: Logarithms and logarithmic plots.</p>
-<blockquote>
-<ul>
-<li><p>First, a couple of questions:</p>
-<ul>
-<li>What kind of relationships will a semi-log plot help you discover? <font color="gray">First think, use your brain to answer, then it's OK to get further inspiration from your LLM. The same goes for the next little question.</font></li>
-<li>What kind of functions will loglog plots help you see?</li>
-</ul>
-</li>
-<li><p>Second, for your Personal Focus Crimes, create a version of "Distribution of crime occurences aggregated over all time" from Week 1's Exercise 3.2, where you display the crime count values on log-scale. Comment on what the plot looks like. Do any new insights arise?</p>
-</li>
-<li><p>Third, let's also try a loglog plot. Inspired by <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0183110">this article</a> I would expect that especially theft could be characterized by a power law distribution also in San Francisco. Let's see if I'm right. <font color="gray">It's OK use LLMs as much as you can for this one</font></p>
-<p><strong>What would a power law mean here?</strong> If theft follows a power law in space, it means crime is <em>extremely</em> concentrated — a tiny number of street corners account for a huge share of all thefts, while most blocks see almost none. This kind of extreme inequality is the hallmark of power-law distributions, and it has real consequences for how we think about "safe" vs. "dangerous" neighborhoods.</p>
-<ul>
-<li><em>Step 1:</em> Divide San Francisco into a grid <strong>roughly</strong> $100m \times 100m$. You can, for example use numpy to do this, I would call <code>np.histogram2d</code>, and searching the internet, it seems that there are also <a href="https://stackoverflow.com/questions/39254704/pandas-group-bins-of-data-per-longitude-latitude">ways to do this in pandas</a>. The earth isn't flat,so <code>lat,</code> <code>lon</code> aren't really squares, but it is OK to ignore.<ul>
-<li><strong>Hint 1</strong>. I really mean approximately 100 meters. It can also be 200 meters. Or 80 meters. Or 300.</li>
-<li><strong>Hint 2</strong>. Ignore outliers. We only want points that are on the SF peninsula</li>
-<li><strong>Hint 3</strong>. If you want help, plus see how this is done with all the bells and whistles, we've made a little example of how you can do the binning. Get it <a href="https://github.com/suneman/socialdata2022/blob/main/lectures/Week5_binning.ipynb">here</a>.</li>
-<li><strong>Hint 4</strong>. Ask your LLM.</li>
-</ul>
-</li>
-<li><em>Step 2:</em> Count the number of thefts occurring within each grid-square (use all data for all time).</li>
-<li><em>Step 3:</em> Tally the counts. Count the number of squares with $k=0$ thefts. We call this $N(0)$. Next, count the number of grids with one crime to get $N(k=1)$. Keep going like this all the way up to $k=C_{max}$, where $C_{max}$ is the highest count of crimes you find in any grid space.<ul>
-<li><em>Extra tip</em>: If you want all the details on binning for loglog axes, you can check out <a href="https://github.com/SocialComplexityLab/socialgraphs2021/blob/main/lectures/Week2.ipynb">Lecture 2, Part 3</a> in my social graphs course.</li>
-</ul>
-</li>
-<li><em>Step 4:</em> Plot the distribution of $k+1$ vs $N(k)$ on linear axes.</li>
-<li><em>Step 5:</em> Plot the distribution of $k+1$ vs $N(k)$ on loglog axes.</li>
-<li><em>Step 6:</em> Answer the question. Was it correct of me to assume that there is a power-law distribution of theft?</li>
-<li><em>Step 7:</em> If theft does follow a power law, what are the practical implications? What does this extreme spatial concentration mean for policing, for city planning, and for the people who live in those hotspots? Does the "average" crime rate for a neighborhood even make sense as a statistic when the distribution looks like this?</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<div class="alert alert-block alert-info">
-LLM notes are in gray in the text. The final question (Step 7) should be your own thinking.
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bee758e4-8238-4a14-97d2-fba9a5701aab">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Part-3:-Linear-Regression">Part 3: Linear Regression<a class="anchor-link" href="#Part-3:-Linear-Regression">¶</a></h2><p>We've been looking at individual crime types — their spatial distributions, their temporal patterns, how they show up on logarithmic scales. Now let's ask a different question: how do different crime types relate to <em>each other</em>?</p>
-<p>Linear regression is one of the simplest and most widely-used tools in quantitative analysis. It's also the conceptual foundation for understanding more complex models — if you understand what a linear fit can and can't tell you, you're well-equipped to reason about fancier techniques later. Here, we'll use it to compare the weekly rhythms of your Personal Focus Crimes and find out which pairs march to the same beat — and which ones are completely out of sync.</p>
-<blockquote>
-<p><em>Which pair of your Personal Focus Crimes have the most similar temporal pattern across the week? (And which pair is most dissimilar).</em></p>
-</blockquote>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e789f52a-5779-4b51-a18a-f05f92d528b9">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>One way to answer this question is to plot the activity for all pairs of crime types as a scatter plot per pair. One crime type on each axis, where each point in the scatter corresponds to an hour of the week, and the number of crimes of crime-type 1 is on the $x$-axis and the number of crimes of crime-type 2 is on the $y$-axis. (So there will be 168 points in each scatterplot.)</p>
-<p>For this exercise, <strong>select 9 of your Personal Focus Crimes</strong> (from Week 2). If you have fewer than 9, use all of them and come up with a reasonable grid. With 9 crimes, you get $\binom{9}{2} = 36$ pairwise comparisons.</p>
-<p><em>Exercise 3.1:</em> Create the 36 scatterplots.</p>
-<blockquote>
-<ul>
-<li>Display the plots in a $6$ by $6$ subplot matrix. You can use matplotlib's <code>subplot</code> to organize those plots. With $6$ across and $6$ down, you should be able to squeeze them all onto a single <a href="https://en.wikipedia.org/wiki/ISO_216#A_series">a4</a> page.<ul>
-<li>Make sure to label each one with the two crime-types you're comparing so we can easily inspect visually.</li>
-<li>The ordering of pairs within the grid is up to you — just be consistent and make sure every label is legible.</li>
-<li>Make sure that you squeeze the subplots closely together so each plot can be as big as possible.</li>
-</ul>
-</li>
-<li>Just inspecting this matrix, which crime-types look correlated and which ones look like they're very different?</li>
-<li>For a pair that looks strongly correlated: <em>why</em> might these two crimes follow the same weekly rhythm? What shared factors could drive both?</li>
-<li>For a pair that looks uncorrelated: what does that tell you about the different contexts in which these crimes occur?</li>
-</ul>
-</blockquote>
-<div class="alert alert-block alert-info">
-It's OK to use your LLM for all aspects of creating the plots. The interpretation should be your own thinking.
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b7f24cb2-d6ef-435a-bc7e-caa0b67d504a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<p>Next it's time for the linear regression. Janert writes about this on page 63-66.</p>
-<p>There is a closed-form solution for linear regression. If you want to find the best straight line $y = ax + b$ fit to a set of $N$ points $\{(x_1,y_1), (x_2,y_2), \ldots (x_N,y_N)\}$, the value of $b$ is</p>
-<p>$$
-\tag{1}
-b = \langle y \rangle - a \langle x \rangle,
-$$</p>
-<p>where $\langle x \rangle = (1/N)\sum_i x_i$ is the mean value of the $x_i$ and $\langle y \rangle = (1/N)\sum_i y_i$ is the mean value of the $y_i$.</p>
-<p>And the value for the slope $a$ is</p>
-<p>$$
-\tag{2}
-a = \frac{\sum_{i=1}^N \left( x_iy_i \right) - N \langle x\rangle\langle y\rangle }{\sum_{i=1}^N\left( x_i^2 \right) - N\langle x\rangle^2}.
-$$</p>
-<p>A few of years ago, I actually derived the whole thing, it's not hard, but it takes up a lot of space, so I've taken it out of the notebook. But if you'd like to take a look (it's a fun and instructive exercise), you can find it <strong><a href="https://github.com/suneman/socialdata2021/blob/main/lectures/LinearRegressionDerived.ipynb">here</a></strong>.</p>
-<p>We are going to focus on the fit for now, but keep in mind what we have learnt so far about the purpose of linear regression!</p>
-<p><em>Exercise 3.2:</em> Linear regression.</p>
-<blockquote>
-<ul>
-<li>Using Equation 1 and 2 above, calculate the slopes for $a$ and $b$ in each case and add them to the plot. (You are free to compare the results with ones obtained using a package like <code>sklearn</code> to check that everything is working as expected.) <font color="gray">See if you can do this by yourself without LLM help</font>.</li>
-<li>You can add even more information to this plot by coloring each point according to its hour of the week. So create a gradient going from one color to another, and color each point according to the gradient. (So let's say your two colors are red and blue, then the Sunday, midnight to 1am bin will be red and the following Sunday, 11pm - midnight bin will be blue). <font color="gray">It's OK use full LLM help here</font></li>
-<li>Do any patterns stand out as you inspect the plot? Mention one or two that catch your eye -- it may be both because the sequences are similar or because they are different, or something entirely different altogether.</li>
-</ul>
-</blockquote>
-<div class="alert alert-block alert-info">
-See LLM comments in gray.
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6b503fe1-6822-49a6-8b6c-8394e14441d5">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<p>But the question we started with was "Which pair of Personal Focus Crimes have the most similar temporal pattern across the week?". We haven't really answered that yet. So let's calculate one last thing: $R^2$.</p>
-<p>Basically $R^2$ is a measure of how good a linear fit is. You can <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">read about $R^2$ on wikipedia</a>.</p>
-<p><em>Exercise 3.3:</em> Goodness of fit as a measure of correlation.</p>
-<blockquote>
-<ul>
-<li>Write a little function to calculate $R^2$ alongside each linear fit. (Again you can compare it with a package to check that it works, e.g. the one provided by the function <code>score()</code> in <code>sklearn</code>.) <font color="gray">Try this without the help of an LLM.</font></li>
-<li>Explain the connection between $R^2$ and the <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">Pearson correlation coefficient</a>. <font color="gray">Try this without the help of an LLM, at least first. Then you may ask it to see if you got it right.</font></li>
-<li><strong>According to the fits and associated $R^2$</strong>, which pair of crimes have the <strong>most similar</strong> temporal pattern. Discuss your finding: Does it make sense? Why?/Why not?</li>
-<li>According to your fits and associated measure of $R^2$, which pair of crimes have the <strong>most dissimilar</strong> temporal pattern. Discuss your finding: Does it make sense? Why?/Why not? Does it corresponds with your observations from the previous exercise?</li>
-<li>Create a final mega-plot with all 36 scatter plots, fits, and $R^2$ value written as <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.text.html">text</a> on each plot. In this figure, you should also find a way to visually highlight the two most similar/dissimilar crimes. <font color="gray">Totally fine to use an LLM to help you organize the plot and make it look amazing.</font></li>
-<li><strong>Connecting back to Week 1</strong>: Think about what your most correlated crime pair means in the context of predictive policing. If a system uses patterns from one crime type to allocate resources for another (because they're correlated), what could go wrong? Consider especially what happens if one of the correlated crimes is enforcement-driven (like drug offenses — more police presence leads to more arrests, which looks like "more crime"). How does this relate to the feedback loops discussed in the Richardson et al. reading?</li>
-</ul>
-</blockquote>
-<div class="alert alert-block alert-info">
-See LLM comments in gray. The final reflection question should be your own thinking — this is where you connect the technical work to the bigger picture from Week 1.
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=wgoude16if8">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr/>
-<h2 id="You've-Completed-Week-4!">You've Completed Week 4!<a class="anchor-link" href="#You've-Completed-Week-4!">¶</a></h2><p>This week you added two major tools to your data science toolkit: logarithmic plots for revealing hidden structure, and linear regression for quantifying relationships between variables. You now have:</p>
-<ul>
-<li>A deeper understanding of data encodings and why some visual channels work better than others</li>
-<li>Experience with semi-log and loglog plots — and hands-on evidence on the spatial concentration of crimes in SF, with real consequences for what 'average neighborhood crime' even means</li>
-<li>The ability to use scatterplots and linear regression to compare temporal patterns across crime types</li>
-<li>Practice implementing regression from scratch (not just calling a library function)</li>
-</ul>
-<p><strong>Key takeaways:</strong></p>
-<ul>
-<li>Logarithmic axes can reveal structure that's invisible on linear scales. Always consider whether your data spans multiple orders of magnitude.</li>
-<li>Power laws are everywhere in social data. When crime concentrates in a tiny number of hotspots, policies built on neighborhood averages can be deeply misleading — or even harmful.</li>
-<li>$R^2$ tells you how much of the variance in one variable is explained by another — but remember the lessons of Anscombe's quartet: always look at the scatterplot, not just the number.</li>
-<li>Crime types that correlate strongly may share underlying drivers (e.g., opportunity, time-of-day patterns). Crime types that don't correlate may respond to very different factors.</li>
-</ul>
-<p>If you want to go further:</p>
-<ul>
-<li>Try non-linear fits for some of the crime pairs — does a polynomial or exponential fit capture the relationship better?</li>
-<li>Explore whether the pairwise correlations change if you split the data into pre-COVID and post-COVID periods</li>
-<li>Revisit the power-law analysis for crime types other than theft — do they all show the same spatial concentration?</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8fd0e96c-11b4-469f-89e9-139771b90f07">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
