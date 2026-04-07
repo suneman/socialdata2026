@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Week4</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Week8</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7796,307 +7796,234 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=940236a2-ab0d-4afb-9606-050823341f23">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=w8c01">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Week-4">Week 4<a class="anchor-link" href="#Week-4">¶</a></h1><h2 id="Overview">Overview<a class="anchor-link" href="#Overview">¶</a></h2><p>Ok, we've arrived at week 4. This lecture covers:</p>
+<h1 id="Week-8">Week 8<a class="anchor-link" href="#Week-8">¶</a></h1><p>Ok young people. As we're warming up to the final project, it's time to create a micro-project. We'll do a short data story, hosted on the website you built last week. This is a structured kind of "dress rehearsal" for the final project: you'll pick an insight from your work so far, build visualizations around it, and publish a narrative piece that a general audience can read and understand (a great chance to impress your friends or parents with your data analysis chops).</p>
+<p>But first, some more reading on how to tell stories with data.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=w8c02">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Today">Today<a class="anchor-link" href="#Today">¶</a></h2><p>This lecture covers:</p>
 <ol>
-<li><strong>More visualization theory</strong>: A video lecture on data encodings and representations — which visual channels work best and why.</li>
-<li><strong>Two-variable data exploration</strong>: Reading from DAOST Chapter 3, plus hands-on work with logarithmic plots and spatial power laws in the crime data.</li>
-<li><strong>Linear regression</strong>: Using pairwise scatterplots and linear fits to discover which of your Personal Focus Crimes share similar temporal patterns across the week.</li>
+<li><strong>Narrative data visualization (continued)</strong>: You'll finish the Segel &amp; Heer paper (sections 4–6) and learn about design patterns, visual narrative techniques, and narrative genres — then apply that vocabulary to your own work.</li>
+<li><strong>A micro-project</strong>: You'll create a short data story about SF crime, published on your GitHub Pages site. Three visualizations, 500–1500 words, magazine-style layout.</li>
+<li><strong>Reflection</strong>: Looking back at what you've built and connecting it to the bigger picture of the course.</li>
 </ol>
-<p><em>New this week</em>: For finer-grained LLM guidance within multi-part exercises, you'll see notes in <font color="gray">gray text</font> inline, alongside the usual blue boxes.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=97749093-0d77-495c-96df-4a0ac7cb489a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=w8c03">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Part-1:-More-lecturing-on-dataviz">Part 1: More lecturing on dataviz<a class="anchor-link" href="#Part-1:-More-lecturing-on-dataviz">¶</a></h2><p>We begin today by learning more about the theory of visualization, digging into data encodings and representations.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=078e1e93-171e-476d-96a3-963977e88fcf">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">YouTubeVideo</span>
-<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">'zE6Nr8trdrw'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">450</span><span class="p">)</span>
-</pre></div>
+<h2 id="Part-1:-More-on-Narrative-Data-Visualization">Part 1: More on Narrative Data Visualization<a class="anchor-link" href="#Part-1:-More-on-Narrative-Data-Visualization">¶</a></h2><p>In Week 6, you read sections 1–3 of the Segel &amp; Heer paper, which introduced the idea of narrative visualization and walked through a set of examples. Now we'll read the analytical core of the paper — where the authors build a taxonomy of design choices and identify genres of narrative visualization.</p>
+<p><em>Reading</em>: <a href="http://vis.stanford.edu/files/2010-Narrative-InfoVis.pdf">Narrative Visualization: Telling Stories with Data</a> by Edward Segel and Jeffrey Heer, <strong>sections 4–6</strong>.</p>
+<p>Section 4 is the heart of the paper. Pay special attention to:</p>
+<ul>
+<li><strong>Figure 7</strong> — a taxonomy of design choices organized into <em>visual narrative</em> and <em>narrative structure</em></li>
+<li><strong>Figure 8</strong> — the seven genres of narrative visualization</li>
+<li><strong>Section 4.3</strong> — how different genres sit on the author-driven ↔ reader-driven spectrum</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<iframe allowfullscreen="" frameborder="0" height="450" src="https://www.youtube.com/embed/zE6Nr8trdrw" width="800"></iframe>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=de5385cd-acd9-4f2b-aaa8-182af2aa832b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=w8c04">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <blockquote>
-<p><em>Exercise 1.1:</em> Some questions about the video.</p>
+<p><em>Exercise 1.1</em>: Questions about the paper.</p>
 <ul>
-<li>Mention 10 examples of ways we can encode data.</li>
-<li>Are all encodings created equally? Why not? Can you think of an example from the previous lectures?</li>
-<li>Mention 3 encodings that are difficult for the human eye to parse. Can you find an example of a visualization online that uses one of those three?</li>
-<li>Explain in your own words: What is the problem with pie-charts?</li>
+<li>What is the point of Figure 7? What does it help you <em>do</em> as a designer of narrative visualizations?</li>
+<li>Use Figure 7 to find the most common design choice within each category for Visual Narrative and Narrative Structure (the categories within Visual Narrative are <em>visual structuring</em>, <em>highlighting</em>, etc.). Are there any design choices that almost nobody uses? Why do you think that is?</li>
+<li>Check out Figure 8 and section 4.3. What is your favorite genre of narrative visualization? Why? What is your least favorite? Why?</li>
+<li>Think back to the professional data viz sites you explored in Week 7's Exercise 1.1. Can you identify which Segel &amp; Heer genre each of your chosen examples belongs to? Do any of them mix genres?</li>
 </ul>
 </blockquote>
 <div class="alert alert-block alert-info">
-Try to answer these using your human brain, don't use an LLM.
+Read the paper and answer these with your own brain. No LLMs.
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c824a430-4a0e-4b26-8a6b-72c0728a9706">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=w8c05">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Part-2:-Exploratory-data-visualization,-two-variables">Part 2: Exploratory data visualization, two variables<a class="anchor-link" href="#Part-2:-Exploratory-data-visualization,-two-variables">¶</a></h2><p>I told you how I love the Data Analysis with Open Source Tools book. If you managed to read Chapter 3, which is about visualizing data with two variables, before coming to class today it's great. If you haven't yet, this is the time to do it!</p>
-<p><em>Reading</em>: DAOST Chapter 3 up to <em>Graphical Analysis and Presentation Graphics</em> on page 68 in the PDF. <strong>Like Last week, you can find it on Teams</strong>.</p>
-<p>And now a few exercises to reflect on the text:</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=990792b1-088c-4557-ba1a-ea3305a3a933">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><em>Exercise 2.1:</em> Questions from DAOST Chapter 3.</p>
 <blockquote>
+<p><em>Exercise 1.2</em>: Apply the taxonomy to your own work.</p>
+<p>Look at the interactive visualizations you built in Week 6 (the Plotly bar chart and the animated line chart).</p>
 <ul>
-<li>Looking at Fig 3-1, Janert writes "the data itself shows clearly that the amount of random noise in the data is small". What do you think his argument is?</li>
-<li>Can you think of a real-world example of a multivariate relationship like the one in Fig 3-3 (lower right panel)?</li>
-<li>What are the two methods Janert metions for smoothing noisy data? Can you think of other ones?</li>
-<li>What are residuals? Why is it a good idea to plot the residuals of your fit?</li>
-<li>Explain in your own words the point of the smooth tube in figure 3-7.</li>
-<li>What the h#ll is banking and what part of our visual system does it use to help us see patterns? What are potential problems with banking?</li>
-<li>Summarize the discussion of Graphical Analysis and Presentation Graphics on pp. 68-69 in your own words.</li>
+<li>Classify each one using the Figure 7 taxonomy. Which <em>visual narrative</em> techniques does it use (or not use)? Which <em>narrative structure</em> elements?</li>
+<li>Where do your visualizations fall on the author-driven / reader-driven spectrum? Are they closer to a martini glass, a drill-down story, or something else?</li>
+<li>If you were to turn one of your Week 6 visualizations into a piece of <em>author-driven</em> narrative visualization — guiding the reader through a specific story rather than letting them explore freely — what would you change? Be concrete: what text would you add, what would you highlight, what interactive freedom would you remove?</li>
 </ul>
 </blockquote>
 <div class="alert alert-block alert-info">
-Read the text and answer the questions to make sure you get it. No need for LLMs here
+This is a thinking exercise. Use your brain, not an LLM. There are no right answers ... but (as always) there are thoughtful and thoughtless ones.
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=80698f45-0ba8-422f-b918-06a07c14732c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9fba0c96-5327-4937-969b-41591d834e50">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Ok. Let's briefly talk about logarithms and logarithmic plots (if you take my networks class in the fall semester you'll se lots of loglog plots since they're important for understanding a key property of networks).</p>
-<p><em>Exercise 2.2</em>: Logarithms and logarithmic plots.</p>
-<blockquote>
-<ul>
-<li><p>First, a couple of questions:</p>
-<ul>
-<li>What kind of relationships will a semi-log plot help you discover? <font color="gray">First think, use your brain to answer, then it's OK to get further inspiration from your LLM. The same goes for the next little question.</font></li>
-<li>What kind of functions will loglog plots help you see?</li>
-</ul>
-</li>
-<li><p>Second, for your Personal Focus Crimes, create a version of "Distribution of crime occurences aggregated over all time" from Week 1's Exercise 3.2, where you display the crime count values on log-scale. Comment on what the plot looks like. Do any new insights arise?</p>
-</li>
-<li><p>Third, let's also try a loglog plot. Inspired by <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0183110">this article</a> I would expect that especially theft could be characterized by a power law distribution also in San Francisco. Let's see if I'm right. <font color="gray">It's OK use LLMs as much as you can for this one</font></p>
-<p><strong>What would a power law mean here?</strong> If theft follows a power law in space, it means crime is <em>extremely</em> concentrated — a tiny number of street corners account for a huge share of all thefts, while most blocks see almost none. This kind of extreme inequality is the hallmark of power-law distributions, and it has real consequences for how we think about "safe" vs. "dangerous" neighborhoods.</p>
-<ul>
-<li><em>Step 1:</em> Divide San Francisco into a grid <strong>roughly</strong> $100m \times 100m$. You can, for example use numpy to do this, I would call <code>np.histogram2d</code>, and searching the internet, it seems that there are also <a href="https://stackoverflow.com/questions/39254704/pandas-group-bins-of-data-per-longitude-latitude">ways to do this in pandas</a>. The earth isn't flat,so <code>lat,</code> <code>lon</code> aren't really squares, but it is OK to ignore.<ul>
-<li><strong>Hint 1</strong>. I really mean approximately 100 meters. It can also be 200 meters. Or 80 meters. Or 300.</li>
-<li><strong>Hint 2</strong>. Ignore outliers. We only want points that are on the SF peninsula</li>
-<li><strong>Hint 3</strong>. If you want help, plus see how this is done with all the bells and whistles, we've made a little example of how you can do the binning. Get it <a href="https://github.com/suneman/socialdata2022/blob/main/lectures/Week5_binning.ipynb">here</a>.</li>
-<li><strong>Hint 4</strong>. Ask your LLM.</li>
-</ul>
-</li>
-<li><em>Step 2:</em> Count the number of thefts occurring within each grid-square (use all data for all time).</li>
-<li><em>Step 3:</em> Tally the counts. Count the number of squares with $k=0$ thefts. We call this $N(0)$. Next, count the number of grids with one crime to get $N(k=1)$. Keep going like this all the way up to $k=C_{max}$, where $C_{max}$ is the highest count of crimes you find in any grid space.<ul>
-<li><em>Extra tip</em>: If you want all the details on binning for loglog axes, you can check out <a href="https://github.com/SocialComplexityLab/socialgraphs2021/blob/main/lectures/Week2.ipynb">Lecture 2, Part 3</a> in my social graphs course.</li>
-</ul>
-</li>
-<li><em>Step 4:</em> Plot the distribution of $k+1$ vs $N(k)$ on linear axes.</li>
-<li><em>Step 5:</em> Plot the distribution of $k+1$ vs $N(k)$ on loglog axes.</li>
-<li><em>Step 6:</em> Answer the question. Was it correct of me to assume that there is a power-law distribution of theft?</li>
-<li><em>Step 7:</em> If theft does follow a power law, what are the practical implications? What does this extreme spatial concentration mean for policing, for city planning, and for the people who live in those hotspots? Does the "average" crime rate for a neighborhood even make sense as a statistic when the distribution looks like this?</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<div class="alert alert-block alert-info">
-LLM notes are in gray in the text. The final question (Step 7) should be your own thinking.
+<h3 id="Life-after-Segel-&amp;-Heer">Life after Segel &amp; Heer<a class="anchor-link" href="#Life-after-Segel-&amp;-Heer">¶</a></h3><p>To me the Segel &amp; Heer paper is still foundational, that's why we read it. But I want to tell you a bit more about what's happened after it came out. Especially, a useful question for you guys is: <em>are all genres created equally?</em> And it turns out not quite.</p>
+<p><em><strong>For high-profile public-facing stories</strong></em>, especially in data journalism, the closest thing to a winner is the author-led, scroll-driven longform piece: annotated charts/maps embedded in a narrative, often with light interaction. That is basically Segel and Heer’s "annotated chart" and "slide show" logic reborn for the web as scrollytelling. Multiple later papers and industry accounts describe <a href="https://ieeexplore.ieee.org/document/8564193">scrollytelling</a> as a prominent online journalism form, especially for complex explanatory stories. You might <a href="https://pudding.cool/process/how-to-make-dope-shit-part-3/">find this piece useful for your final project</a>.</p>
+<p>But <em><strong>across dataviz more broadly</strong></em>, the bigger winner is actually simpler, annotated, mostly static or lightly interactive graphics. Segel and Heer already observed that heavy messaging was under-used in interactive graphs; later work suggests the field moved toward clearer author guidance rather than pure free exploration. In practice, that means headlines, captions, annotations, small multiples, and a bit of hover/filtering—enough interactivity to inspect, not enough to abandon the narrative.</p>
+<p>What did not dominate is the fully open-ended, reader-driven interactive as the main storytelling vehicle. Those systems are important for exploration and analysis, but for communication to broad audiences the center of gravity shifted toward hybrid forms: the author sets the path, the reader gets limited agency. (That is almost exactly the middle ground Segel and Heer predicted.)</p>
+<p>All of the above is good to keep in mind when you choose a story for your final project.</p>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bee758e4-8238-4a14-97d2-fba9a5701aab">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Part-3:-Linear-Regression">Part 3: Linear Regression<a class="anchor-link" href="#Part-3:-Linear-Regression">¶</a></h2><p>We've been looking at individual crime types — their spatial distributions, their temporal patterns, how they show up on logarithmic scales. Now let's ask a different question: how do different crime types relate to <em>each other</em>?</p>
-<p>Linear regression is one of the simplest and most widely-used tools in quantitative analysis. It's also the conceptual foundation for understanding more complex models — if you understand what a linear fit can and can't tell you, you're well-equipped to reason about fancier techniques later. Here, we'll use it to compare the weekly rhythms of your Personal Focus Crimes and find out which pairs march to the same beat — and which ones are completely out of sync.</p>
-<blockquote>
-<p><em>Which pair of your Personal Focus Crimes have the most similar temporal pattern across the week? (And which pair is most dissimilar).</em></p>
-</blockquote>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e789f52a-5779-4b51-a18a-f05f92d528b9">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>One way to answer this question is to plot the activity for all pairs of crime types as a scatter plot per pair. One crime type on each axis, where each point in the scatter corresponds to an hour of the week, and the number of crimes of crime-type 1 is on the $x$-axis and the number of crimes of crime-type 2 is on the $y$-axis. (So there will be 168 points in each scatterplot.)</p>
-<p>For this exercise, <strong>select 9 of your Personal Focus Crimes</strong> (from Week 2). If you have fewer than 9, use all of them and come up with a reasonable grid. With 9 crimes, you get $\binom{9}{2} = 36$ pairwise comparisons.</p>
-<p><em>Exercise 3.1:</em> Create the 36 scatterplots.</p>
-<blockquote>
-<ul>
-<li>Display the plots in a $6$ by $6$ subplot matrix. You can use matplotlib's <code>subplot</code> to organize those plots. With $6$ across and $6$ down, you should be able to squeeze them all onto a single <a href="https://en.wikipedia.org/wiki/ISO_216#A_series">a4</a> page.<ul>
-<li>Make sure to label each one with the two crime-types you're comparing so we can easily inspect visually.</li>
-<li>The ordering of pairs within the grid is up to you — just be consistent and make sure every label is legible.</li>
-<li>Make sure that you squeeze the subplots closely together so each plot can be as big as possible.</li>
-</ul>
-</li>
-<li>Just inspecting this matrix, which crime-types look correlated and which ones look like they're very different?</li>
-<li>For a pair that looks strongly correlated: <em>why</em> might these two crimes follow the same weekly rhythm? What shared factors could drive both?</li>
-<li>For a pair that looks uncorrelated: what does that tell you about the different contexts in which these crimes occur?</li>
-</ul>
-</blockquote>
-<div class="alert alert-block alert-info">
-It's OK to use your LLM for all aspects of creating the plots. The interpretation should be your own thinking.
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b7f24cb2-d6ef-435a-bc7e-caa0b67d504a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=w8c06">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<p>Next it's time for the linear regression. Janert writes about this on page 63-66.</p>
-<p>There is a closed-form solution for linear regression. If you want to find the best straight line $y = ax + b$ fit to a set of $N$ points $\{(x_1,y_1), (x_2,y_2), \ldots (x_N,y_N)\}$, the value of $b$ is</p>
-<p>$$
-\tag{1}
-b = \langle y \rangle - a \langle x \rangle,
-$$</p>
-<p>where $\langle x \rangle = (1/N)\sum_i x_i$ is the mean value of the $x_i$ and $\langle y \rangle = (1/N)\sum_i y_i$ is the mean value of the $y_i$.</p>
-<p>And the value for the slope $a$ is</p>
-<p>$$
-\tag{2}
-a = \frac{\sum_{i=1}^N \left( x_iy_i \right) - N \langle x\rangle\langle y\rangle }{\sum_{i=1}^N\left( x_i^2 \right) - N\langle x\rangle^2}.
-$$</p>
-<p>A few of years ago, I actually derived the whole thing, it's not hard, but it takes up a lot of space, so I've taken it out of the notebook. But if you'd like to take a look (it's a fun and instructive exercise), you can find it <strong><a href="https://github.com/suneman/socialdata2021/blob/main/lectures/LinearRegressionDerived.ipynb">here</a></strong>.</p>
-<p>We are going to focus on the fit for now, but keep in mind what we have learnt so far about the purpose of linear regression!</p>
-<p><em>Exercise 3.2:</em> Linear regression.</p>
+<h2 id="Part-2:-A-Short-Data-Story">Part 2: A Short Data Story<a class="anchor-link" href="#Part-2:-A-Short-Data-Story">¶</a></h2><p>Now for the main event. Time to put it all together. You're going to create a short data story: a narrative visualization piece published on your GitHub Pages site. Think of it as a magazine article with interactive graphics: a reader scrolls from top to bottom, encountering text and visualizations that build toward an insight.</p>
+<p>This is a micro version of what you'll do in the final project. The constraints are tight on purpose. It's my way of forcing you to think carefully and make choices about what matters most. In the future, when you get a job, that's an important skill. Your busy boss won't have time to see all the plots, just the essential ones.</p>
+<p>In Exercise 1.2 you thought about what it takes to guide a reader through a story. Now you'll do it for real.</p>
 <blockquote>
-<ul>
-<li>Using Equation 1 and 2 above, calculate the slopes for $a$ and $b$ in each case and add them to the plot. (You are free to compare the results with ones obtained using a package like <code>sklearn</code> to check that everything is working as expected.) <font color="gray">See if you can do this by yourself without LLM help</font>.</li>
-<li>You can add even more information to this plot by coloring each point according to its hour of the week. So create a gradient going from one color to another, and color each point according to the gradient. (So let's say your two colors are red and blue, then the Sunday, midnight to 1am bin will be red and the following Sunday, 11pm - midnight bin will be blue). <font color="gray">It's OK use full LLM help here</font></li>
-<li>Do any patterns stand out as you inspect the plot? Mention one or two that catch your eye -- it may be both because the sequences are similar or because they are different, or something entirely different altogether.</li>
-</ul>
+<p><em>Exercise 2.1</em>: Create a data story. Follow the specifications below.</p>
 </blockquote>
 <div class="alert alert-block alert-info">
-See LLM comments in gray.
+In general, I hope you will <b>use LLMs as little as possible for the <i>writing</i> in this exercise</b>. Use your brain, think critically, find good stories and write about them. Many LLMs have a tendency to write a lot of elegantly worded but generic and "empty" text. I can't tell you how tired I am of that style. I want the text &amp; arguments to feel like YOU, not some corporate entity.. It is OK to have the LLM help with typos or even grammar if English is difficult for you. In terms of HTML/CSS, code for generating visualizations, etc, the comments in the exercises up to now are still valid.
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6b503fe1-6822-49a6-8b6c-8394e14441d5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=w8c07">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="The-story">The story<a class="anchor-link" href="#The-story">¶</a></h3><ul>
+<li><strong>Find your own story to tell</strong> based on the work we've done analyzing SF crime data in Weeks 1–7. The idea is to choose an insight (perhaps how something changed over the years, a surprising geographic pattern, an unexpected correlation) and communicate it to a general audience reader.</li>
+<li>The story should have a <strong>brief introduction to the dataset</strong> so that readers from outside the class can understand what they're looking at. Don't assume your reader knows what "Personal Focus Crimes" are or where the data comes from.</li>
+</ul>
+<h3 id="The-format">The format<a class="anchor-link" href="#The-format">¶</a></h3><ul>
+<li>The page must be hosted on your <strong>GitHub Pages site</strong> (from Week 7).</li>
+<li>Use the <em><strong>Magazine Genre</strong></em> from the Segel &amp; Heer paper: a single web page that reads linearly from top to bottom. Text and visualizations alternate — the author guides the reader through a specific narrative. <strong>Important</strong>: You don't need two columns or a fancy layout. What matters is the <em>linear, author-driven structure</em>: you control what the reader sees and in what order.</li>
+<li>Remember what you learned in Exercise 1.2 about the author-driven end of the spectrum — this is your chance to practice it.</li>
+<li><strong>Aim for brivity</strong>. Quality over quantity: a tight &amp; short piece with a clear point beats a rambling essay that tries to cover everything.</li>
+</ul>
+<h3 id="The-visualizations">The visualizations<a class="anchor-link" href="#The-visualizations">¶</a></h3><p>Your story must include <strong>exactly three visualizations</strong> (not more, not fewer. It is OK to have multi-panel figures, those count as one). Each should be a different type:</p>
+<ol>
+<li><strong>One static chart</strong>: a time-series, bar chart, or one of the fancier types you've learned (calendar plot, polar bar chart, box plot, etc.) — whatever best supports your story. Export it as a PNG or SVG using <code>plt.savefig()</code>.</li>
+<li><strong>One map</strong>: a choropleth (Plotly), a Folium scatter/heatmap, or a <code>HeatMapWithTime</code> animation. Export using <code>fig.write_html()</code> or <code>m.save()</code>.</li>
+<li><strong>One interactive Plotly visualization</strong>: this should contain <strong>different data</strong> than the exercises from Week 6. It's a plus if it's a different <em>type</em> of interactive viz altogether (not just another bar chart with the same structure). Export with <code>fig.write_html()</code>.</li>
+</ol>
+<p>You already know how to export and embed all of these from Week 7 — use those skills here.</p>
+<h3 id="Make-it-look-good">Make it look good<a class="anchor-link" href="#Make-it-look-good">¶</a></h3><ul>
+<li><strong>Figure captions</strong>: Every visualization needs a description. In scientific papers we always have captions with detailed descriptions. When you create data-visualizations, the picture is less clear. Sometimes captions are the right choice. Other times it makes more sense to keep the figure description the text round the figures. No strict rules apply in dataviz. But <b>for this assignment I want captions</b>, captions that tell the reader what they're looking at and what to notice. Don't just label axes; tell the reader <em>what the figure shows and why it matters</em>.</li>
+<li><strong>Visual consistency</strong>: Aim for a consistent look across your three figures — similar color palettes, similar fonts, similar level of polish. This is one of the things that separates amateur from professional work. (Go nuts with our LLM here, I really hope to see some nice webpages).</li>
+<li><strong>Follow the recommendations</strong> from the video on nice figures (Week 2).</li>
+<li><strong>External sources</strong>: It's a plus if you can back up your findings with outside evidence — news stories, Wikipedia articles about specific neighborhoods, city policy changes. When you see something in the data (a spike, a drop, a geographic hotspot), try to find out <em>why</em>. Use real references at the end of the text.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=w8c08">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Think-critically">Think critically<a class="anchor-link" href="#Think-critically">¶</a></h3><p>Your data story isn't just a report of patterns — it's a piece of communication that a reader might act on or share. Consider:</p>
+<ul>
+<li>Are you just <em>describing</em> patterns, or are you <em>interpreting</em> them? If you write "drug offenses dropped 40% in the Tenderloin between 2010 and 2020," a reader might conclude that drug use declined. But you know from Week 1 (Richardson et al.) that enforcement changes can look exactly like crime changes in the data. Be honest about what your data can and can't show.</li>
+<li>If someone used your story to argue for a policy change (more patrols, budget reallocation, neighborhood investment), would the data actually support that argument? You don't need to answer this in the story itself, but thinking about it will make your writing more careful and precise.</li>
+</ul>
+<p>This connects all the way back to Week 1's discussion of predictive policing and dirty data. The whole course has been building toward this: you can now create compelling, interactive data visualizations. And as my uncle Ben always used to say: With great dataviz power comes the great responsibility to present data honestly.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=w8c09">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<p>But the question we started with was "Which pair of Personal Focus Crimes have the most similar temporal pattern across the week?". We haven't really answered that yet. So let's calculate one last thing: $R^2$.</p>
-<p>Basically $R^2$ is a measure of how good a linear fit is. You can <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">read about $R^2$ on wikipedia</a>.</p>
-<p><em>Exercise 3.3:</em> Goodness of fit as a measure of correlation.</p>
+<h2 id="Part-3:-Think-about-your-beautiful-creation">Part 3: Think about your beautiful creation<a class="anchor-link" href="#Part-3:-Think-about-your-beautiful-creation">¶</a></h2><p>You've now built a complete data-communication pipeline. We started from raw CSV files, cleaned and merged data, did loads of exploratory analysis, constructed, interactive visualizations, and finally a published narrative on the web. Holy moly, I think that's pretty great. Maybe you didn't notice it along the way, but I hope that when you think back on the entire flow you'll realize that you've really added a new thing to your mental toolkit.</p>
 <blockquote>
+<p><em>Exercise 3.1</em>: Reflection.</p>
 <ul>
-<li>Write a little function to calculate $R^2$ alongside each linear fit. (Again you can compare it with a package to check that it works, e.g. the one provided by the function <code>score()</code> in <code>sklearn</code>.) <font color="gray">Try this without the help of an LLM.</font></li>
-<li>Explain the connection between $R^2$ and the <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">Pearson correlation coefficient</a>. <font color="gray">Try this without the help of an LLM, at least first. Then you may ask it to see if you got it right.</font></li>
-<li><strong>According to the fits and associated $R^2$</strong>, which pair of crimes have the <strong>most similar</strong> temporal pattern. Discuss your finding: Does it make sense? Why?/Why not?</li>
-<li>According to your fits and associated measure of $R^2$, which pair of crimes have the <strong>most dissimilar</strong> temporal pattern. Discuss your finding: Does it make sense? Why?/Why not? Does it corresponds with your observations from the previous exercise?</li>
-<li>Create a final mega-plot with all 36 scatter plots, fits, and $R^2$ value written as <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.text.html">text</a> on each plot. In this figure, you should also find a way to visually highlight the two most similar/dissimilar crimes. <font color="gray">Totally fine to use an LLM to help you organize the plot and make it look amazing.</font></li>
-<li><strong>Connecting back to Week 1</strong>: Think about what your most correlated crime pair means in the context of predictive policing. If a system uses patterns from one crime type to allocate resources for another (because they're correlated), what could go wrong? Consider especially what happens if one of the correlated crimes is enforcement-driven (like drug offenses — more police presence leads to more arrests, which looks like "more crime"). How does this relate to the feedback loops discussed in the Richardson et al. reading?</li>
+<li>What was the hardest part of creating the data story — the analysis, the visualization, the writing, or the web design? Why?</li>
+<li>Think about the author-driven to reader-driven spectrum one more time. Your data story is heavily author-driven (you chose what to show, in what order). But your interactive Plotly chart gives the reader some freedom to explore. Is that tension a problem, or does it work? How does the interactivity change the reading experience compared to the static figures?</li>
+<li>If you had unlimited time, what would you add or change about your story?</li>
 </ul>
 </blockquote>
 <div class="alert alert-block alert-info">
-See LLM comments in gray. The final reflection question should be your own thinking — this is where you connect the technical work to the bigger picture from Week 1.
+This is reflection — use your own brain.
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=wgoude16if8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=w8c10">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<h2 id="You've-Completed-Week-4!">You've Completed Week 4!<a class="anchor-link" href="#You've-Completed-Week-4!">¶</a></h2><p>This week you added two major tools to your data science toolkit: logarithmic plots for revealing hidden structure, and linear regression for quantifying relationships between variables. You now have:</p>
+<h2 id="You've-Completed-Week-8!">You've Completed Week 8!<a class="anchor-link" href="#You've-Completed-Week-8!">¶</a></h2><p>This week you went from reader to author — from analyzing data to telling a story with it. You now have:</p>
 <ul>
-<li>A deeper understanding of data encodings and why some visual channels work better than others</li>
-<li>Experience with semi-log and loglog plots — and hands-on evidence on the spatial concentration of crimes in SF, with real consequences for what 'average neighborhood crime' even means</li>
-<li>The ability to use scatterplots and linear regression to compare temporal patterns across crime types</li>
-<li>Practice implementing regression from scratch (not just calling a library function)</li>
+<li>A deeper understanding of narrative visualization design patterns (Segel &amp; Heer's taxonomy and genres)</li>
+<li>A published data story on your website, combining static and interactive visualizations with narrative text</li>
+<li>Practice making editorial choices: what to include, what to leave out, and how to guide a reader through a complex dataset</li>
+<li>Experience thinking critically about what your data can and can't show</li>
 </ul>
-<p><strong>Key takeaways:</strong></p>
+<p><strong>What I hope you've learned:</strong></p>
 <ul>
-<li>Logarithmic axes can reveal structure that's invisible on linear scales. Always consider whether your data spans multiple orders of magnitude.</li>
-<li>Power laws are everywhere in social data. When crime concentrates in a tiny number of hotspots, policies built on neighborhood averages can be deeply misleading — or even harmful.</li>
-<li>$R^2$ tells you how much of the variance in one variable is explained by another — but remember the lessons of Anscombe's quartet: always look at the scatterplot, not just the number.</li>
-<li>Crime types that correlate strongly may share underlying drivers (e.g., opportunity, time-of-day patterns). Crime types that don't correlate may respond to very different factors.</li>
+<li>A visualization without context is just a pretty shape. The text around your figures — the introduction, the captions, the interpretation — is what turns a chart into an argument.</li>
+<li>The magazine genre works because it's familiar: readers know how to scroll and read. But within that simple structure, your design choices (what to highlight, when to let the reader interact, how much to explain) shape what the reader takes away.</li>
+<li>Data stories are never neutral. The crime patterns you visualized exist in a context of enforcement practices, policy changes, and social dynamics. Being honest about those limitations isn't a weakness — it's what makes your analysis trustworthy.</li>
+<li>As I mentioned above, you've now completed the full loop: from Week 1's critical reading about predictive policing, through weeks of hands-on analysis, to publishing your own data-driven narrative. You know firsthand that it's possible to find interesting patterns in data, and you've thought about how much care it takes to present them responsibly.</li>
 </ul>
 <p>If you want to go further:</p>
 <ul>
-<li>Try non-linear fits for some of the crime pairs — does a polynomial or exponential fit capture the relationship better?</li>
-<li>Explore whether the pairwise correlations change if you split the data into pre-COVID and post-COVID periods</li>
-<li>Revisit the power-law analysis for crime types other than theft — do they all show the same spatial concentration?</li>
+<li>Read the rest of the Segel &amp; Heer paper (section 7) for their discussion of future directions — many of which have been realized in the years since 2010.</li>
+<li>Look at the <a href="https://www.informationisbeautifulawards.com/">Information is Beautiful Awards</a> for inspiration for your final project.</li>
+<li>Try rewriting your data story for a different audience (a city council member, a fellow data scientist, a high school student). How does the narrative change?</li>
 </ul>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8fd0e96c-11b4-469f-89e9-139771b90f07">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=w8c11">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
