@@ -25,3 +25,4 @@ That's it. After a minute or so the changes will be live at:
 - The script converts all `lectures/*.ipynb` and generates a simple index page in `docs/`
 - Your existing site at `suneman.github.io` is not affected — project Pages are served under `/socialdata2026/`
 - If you add new notebooks, just re-run the script — they'll appear automatically
+- Page views are counted with GoatCounter (same site as sunelehmann.com, cookie-less): `build_html.sh` puts the snippet in the index heredoc and seds it into every nbconvert page. Keep both lines when copying this script to a new year.
