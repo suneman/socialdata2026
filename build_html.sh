@@ -19,6 +19,8 @@ mkdir -p "$DOCS_DIR/lectures"
 # Convert notebooks to HTML
 echo "Converting notebooks..."
 jupyter nbconvert --to html "$LECTURES_DIR"/*.ipynb --output-dir "$DOCS_DIR/lectures/"
+# Page-view counter (GoatCounter, same site as sunelehmann.com; no cookies)
+sed -i '' 's#</head>#<script data-goatcounter="https://suneman.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></head>#' "$DOCS_DIR"/lectures/*.html
 echo "Done."
 
 # Generate index page
@@ -29,6 +31,8 @@ cat > "$DOCS_DIR/index.html" << 'HTMLEOF'
 <head>
   <meta charset="utf-8">
   <title>Social Data Analysis 2026</title>
+  <script data-goatcounter="https://suneman.goatcounter.com/count"
+          async src="https://gc.zgo.at/count.js"></script>
   <style>
     body { font-family: system-ui, sans-serif; max-width: 700px; margin: 2em auto; padding: 0 1em; }
     h1 { margin-bottom: 0.3em; }
